@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocFromAuth,
 } from "../../util/firebase/Firebase.util";
-import { FormInput } from "../FormInput/FormInput";
-import "./SignUpForm.scss";
 
+import { FormInput } from "../FormInput/FormInput";
 import { Button } from "../Button/Button";
+
+import { UserContext } from "../../context/Users.context";
+
+import "./SignUpForm.scss";
 
 const defaultFormFields = {
   displayName: "",
@@ -20,10 +24,12 @@ export default function SignUpForm() {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
 
+  const { setCurrentUser } = useContext(UserContext);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!password == confirmPassword) {
+    if (!password === confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
@@ -31,9 +37,10 @@ export default function SignUpForm() {
     try {
       const auth = await createAuthUserWithEmailAndPassword(email, password);
       await createUserDocFromAuth({ ...auth.user, displayName });
+      setCurrentUser(auth.user);
       setFormFields(defaultFormFields);
     } catch (err) {
-      if (err.code == "auth/email-already-in-use") {
+      if (err.code === "auth/email-already-in-use") {
         alert("Email already in use");
       } else {
         console.log(err.message);
