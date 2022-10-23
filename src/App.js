@@ -1,9 +1,10 @@
 import { Routes, Route } from "react-router-dom";
 
 import "./categories.scss";
-import Home from "./components/routes/Home/Home.jsx";
-import Navigation from "./components/routes/Navigation/Navigation";
-import Authentication from "./components/routes/Authentication/Authentication";
+import Home from "./routes/Home/Home.jsx";
+import Navigation from "./routes/Navigation/Navigation";
+import Authentication from "./routes/Authentication/Authentication";
+import Shop from "./routes/Shop/Shop";
 
 const App = () => {
   return (
@@ -11,6 +12,7 @@ const App = () => {
       <Route path="/" element={<Navigation />}>
         <Route index element={<Home />} />
         <Route path="auth" element={<Authentication />} />
+        <Route path="shop" element={<Shop />} />
       </Route>
     </Routes>
   );
