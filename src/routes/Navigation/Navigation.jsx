@@ -5,12 +5,14 @@ import CartIcon from "../../components/CartIcon/CartIcon";
 import CartDropdown from "../../components/CartDropdown/CartDropdown";
 
 import { UserContext } from "../../context/Users.context";
+import { CartContext } from "../../context/Cart.context";
 import { signOutUser } from "../../util/firebase/Firebase.util";
 
 import "./Navigation.scss";
 
 export default function Navigation() {
   const { currentUser } = useContext(UserContext);
+  const { isCartOpen } = useContext(CartContext);
 
   return (
     <>
@@ -34,7 +36,8 @@ export default function Navigation() {
           )}
           <CartIcon />
         </div>
-        <CartDropdown />
+        {/* short circuit operator */}
+        {isCartOpen && <CartDropdown />}
       </div>
       <Outlet />
     </>
