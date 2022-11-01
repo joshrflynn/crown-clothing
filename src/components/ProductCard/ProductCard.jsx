@@ -6,9 +6,9 @@ import { Button } from "../Button/Button";
 
 const ProductCard = ({ product }) => {
   const { name, imageUrl, price } = product;
-  const { addItemToCart } = useContext(CartContext);
+  const { incrementItemInCart } = useContext(CartContext);
   const addItemHandler = () => {
-    addItemToCart(product);
+    incrementItemInCart(product);
   };
 
   return (
