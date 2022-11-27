@@ -1,15 +1,16 @@
 import React from "react";
-import CategoryItem from "../CategoryItem/CategoryItem";
-import "./Directory.scss";
+import DirectoryItem from "../DirectoryItem/DirectoryItem";
+import "./Directory.styles.jsx";
+import { CategoriesContainer } from "./Directory.styles.jsx";
 
 export default function Directory(props) {
   const { categories } = props;
 
   return (
-    <div className="categories-container">
+    <CategoriesContainer>
       {categories.map((category) => {
-        return <CategoryItem key={category.id} category={category}></CategoryItem>;
+        return <DirectoryItem key={category.id} category={category} />;
       })}
-    </div>
+    </CategoriesContainer>
   );
 }
